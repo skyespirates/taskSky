@@ -1,0 +1,47 @@
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  position: relative;
+  background-color: var(--body-color);
+  color: var(--text-color);
+  transition: background-color 0.4s;
+}
+
+.box {
+  width: 400px;
+  min-height: 240px;
+  background-color: var(--box-color);
+  padding: 2rem;
+  border-radius: 1rem;
+  margin-top: 100px;
+  transition: background-color 0.4s;
+}
+.change-theme {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 1.8rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--box-color);
+}
+.change-theme:hover {
+  color: #a8a8a8;
+}
+
+/* Light Theme */
+.light-theme .change-theme {
+  color: var(--body-color);
+}
+.light-theme .change-theme:hover {
+  color: rgb(87, 87, 87);
+}
