@@ -15,10 +15,19 @@
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
 body,
 button,
 input {
   font-size: var(--normal-font-size);
+}
+
+body {
+  min-height: 100vh;
 }
 
 button,
