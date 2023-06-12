@@ -8,6 +8,12 @@
   --box-color: hsl(0, 0%, 20%);
   --text-color: hsl(219, 8%, 75%);
 }
+/* Light Theme */
+body.light-theme {
+  --body-color: hsl(0, 0%, 90%);
+  --box-color: hsl(0, 0%, 80%);
+  --text-color: hsl(0, 0%, 50%);
+}
 
 * {
   margin: 0;
@@ -64,11 +70,4 @@ button i {
 }
 span {
   margin-bottom: 0 !important;
-}
-
-/* Light Theme */
-.light-theme {
-  --body-color: hsl(0, 0%, 90%);
-  --box-color: hsl(0, 0%, 80%);
-  --text-color: hsl(0, 0%, 50%);
 }
