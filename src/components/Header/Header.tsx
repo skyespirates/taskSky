@@ -1,43 +1,17 @@
 import { NavLink } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useContext } from "react";
+import { ThemeContext } from "../../context/themeContext";
 import "./style.css";
 
 const Header = () => {
+  const { state, dispatch } = useContext(ThemeContext);
+  console.log(state);
   const [show, setShow] = useState(false);
 
-  const body = document.querySelector("body");
-  const btn = document.getElementById("theme-button");
-
-  // Dark/Light Theme
-  const lightTheme = "light-theme";
-  const iconTheme = "bxs-moon";
-
-  // Previosly selected theme
-  const selectedTheme = localStorage.getItem("selected-theme");
-  const selectedIcon = localStorage.getItem("selected-icon");
-
-  // Obtain current theme and icon
-  const getCurrentTheme = () =>
-    body?.classList.contains(lightTheme) ? "light" : "dark";
-  const getCurrentIcon = () =>
-    btn?.classList.contains(iconTheme) ? "bxs-sun" : "bxs-moon";
-
-  useEffect(() => {
-    if (selectedTheme) {
-      document.body.classList[selectedTheme === "light" ? "add" : "remove"](
-        lightTheme
-      );
-      btn?.classList[selectedIcon === "bxs-sun" ? "add" : "remove"](iconTheme);
-    }
-  }, []);
-
   const toggleTheme = () => {
-    const btn = document.getElementById("theme-button");
-    console.log(btn);
-    body?.classList.toggle(lightTheme);
-    btn?.classList.toggle(iconTheme);
-    localStorage.setItem("selected-theme", getCurrentTheme());
-    localStorage.setItem("selected-icon", getCurrentIcon());
+    const body = document.querySelector("body") as HTMLBodyElement;
+    body.classList.toggle("light-theme");
+    dispatch({ type: "CHANGE_THEME" });
   };
   return (
     <header>
@@ -66,7 +40,10 @@ const Header = () => {
         {/* Nav Buttons */}
         <div className="nav__buttons">
           <button className="toggle__theme" onClick={toggleTheme}>
-            <i className="bx bxs-sun bxs-moon" id="theme-button"></i>
+            <i
+              className={`bx bxs-${state.theme === "dark" ? "moon" : "sun"}`}
+              id="theme-button"
+            ></i>
           </button>
           <a href="https://github.com/skyespirates/taskSky" target="_blank">
             <i className="bx bxl-github"></i>
