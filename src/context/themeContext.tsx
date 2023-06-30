@@ -20,7 +20,9 @@ export const ThemeContext = createContext<{
   dispatch: React.Dispatch<ActionType>;
 }>({ state: INITIAL_STATE, dispatch: () => {} });
 
-const reducer = (state: StateType, action: ActionType): StateType => {
+type Reducer<S, A> = (state: S, action: A) => S;
+
+const reducer: Reducer<StateType, ActionType> = (state, action) => {
   switch (action.type) {
     case "CHANGE_THEME":
       return { ...state, theme: state.theme === "dark" ? "light" : "dark" };

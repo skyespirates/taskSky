@@ -5,7 +5,6 @@ import "./style.css";
 
 const Header = () => {
   const { state, dispatch } = useContext(ThemeContext);
-  console.log(state);
   const [show, setShow] = useState(false);
 
   const toggleTheme = () => {
