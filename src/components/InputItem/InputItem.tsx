@@ -1,39 +1,33 @@
-import { useState } from "react";
-import "./style.css";
-import { nanoid } from "nanoid";
-type Item = {
-  id: string;
-  text: string;
-  isCompleted: boolean;
-};
+import { useRef } from "react";
+import { useContext } from "react";
+import { TodoContext, ActionType } from "../../context/todoContext";
 
-type InputItemProps = {
-  items: Item[];
-  setItem: React.Dispatch<React.SetStateAction<Item[]>>;
-};
+const InputItem = () => {
+  const inputRef = useRef<HTMLInputElement>(null);
 
-const InputItem = ({ items, setItem }: InputItemProps) => {
-  const [todo, setTodo] = useState("");
+  const { dispatch } = useContext(TodoContext);
+
   const handleSubmit = (event: React.SyntheticEvent): void => {
     event.preventDefault();
-    if (!todo || todo.trim().length === 0) {
-      setTodo("");
-      return;
+    const text = inputRef.current?.value.trim();
+    if (text) {
+      dispatch({ type: ActionType.ADD_TODO, payload: text });
+      inputRef.current!.value = "";
     }
-    setItem([...items, { id: nanoid(10), text: todo, isCompleted: false }]);
-    setTodo("");
   };
 
   return (
-    <form className="add__todo" onSubmit={handleSubmit}>
+    <form className="flex items-center space-x-2 mb-2" onSubmit={handleSubmit}>
       <input
-        className="input__todo"
+        ref={inputRef}
+        className="border shadow-sm outline-none px-2 py-2 rounded flex-1"
         type="text"
         placeholder="Add Todo..."
-        value={todo}
-        onChange={(e) => setTodo(e.target.value)}
       />
-      <button type="submit" className="add__button">
+      <button
+        type="submit"
+        className="text-2xl text-white bg-blue-500 hover:bg-blue-600 px-2 py-1 rounded"
+      >
         <i className="bx bx-plus"></i>
       </button>
     </form>

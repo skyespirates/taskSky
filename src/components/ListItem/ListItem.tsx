@@ -1,26 +1,35 @@
-import "./style.css";
-
-type ListItemProps = {
+import { useContext } from "react";
+import { TodoContext, ActionType } from "../../context/todoContext";
+type Todo = {
   id: string;
   text: string;
-  isComplete: boolean;
-  handleDelete: (text: string) => void;
-  handleCompleted: (id: string) => void;
+  completed: boolean;
+};
+type ListItemProps = {
+  todo: Todo;
 };
 
-const ListItem = ({
-  id,
-  text,
-  isComplete,
-  handleDelete,
-  handleCompleted,
-}: ListItemProps) => {
+const ListItem = ({ todo }: ListItemProps) => {
+  const { dispatch } = useContext(TodoContext);
+  const { id, text, completed } = todo;
+
   return (
-    <li className={`list__item`} onClick={() => handleCompleted(id)}>
-      <span className={`${isComplete ? "completed" : ""}`}>{text}</span>
-      <button className="delete__button" onClick={() => handleDelete(id)}>
-        <i className="bx bxs-trash-alt"></i>
-      </button>
+    <li className="flex justify-between border rounded px-2 py-1">
+      <span className={`${completed ? "line-through" : ""}`}>{text}</span>
+      <span className="text-xl space-x-1">
+        <i
+          onClick={() =>
+            dispatch({ type: ActionType.TOGGLE_COMPLETED, payload: id })
+          }
+          className="bx bx-check cursor-pointer text-green-500 hover:text-green-600"
+        ></i>
+        <i
+          onClick={() =>
+            dispatch({ type: ActionType.DELETE_TODO, payload: id })
+          }
+          className="bx bxs-trash-alt cursor-pointer text-violet-500 hover:text-violet-600"
+        ></i>
+      </span>
     </li>
   );
 };

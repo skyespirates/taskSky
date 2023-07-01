@@ -4,10 +4,21 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 
+// state management
+import { Provider } from "react-redux";
+import store from "./store.ts";
+
+// context provider
+import { TodoProvider } from "./context/todoContext.tsx";
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <BrowserRouter>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </BrowserRouter>
+  <Provider store={store}>
+    <TodoProvider>
+      <BrowserRouter>
+        <React.StrictMode>
+          <App />
+        </React.StrictMode>
+      </BrowserRouter>
+    </TodoProvider>
+  </Provider>
 );

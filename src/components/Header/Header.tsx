@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useState, useContext } from "react";
 import { ThemeContext } from "../../context/themeContext";
-import "./style.css";
 
 const Header = () => {
   const { state, dispatch } = useContext(ThemeContext);
@@ -13,47 +12,35 @@ const Header = () => {
     dispatch({ type: "CHANGE_THEME" });
   };
   return (
-    <header>
-      <nav className="nav">
-        <a href="#" className="nav__logo">
-          Task<span>Sky</span>
+    <header className="">
+      <nav className="border flex justify-between items-center py-2 px-8">
+        <a href="/" className="text-2xl">
+          Task<span className="text-blue-600">Sky</span>
         </a>
-        <div className={`nav__menu ${show ? "show-menu" : ""}`}>
-          <ul className="nav__items">
-            <NavLink
-              onClick={() => setShow(!show)}
-              to="/"
-              className="nav__item"
-            >
-              Home
-            </NavLink>
-            <NavLink
-              onClick={() => setShow(!show)}
-              to="/about"
-              className="nav__item"
-            >
-              About
-            </NavLink>
-          </ul>
+        <div className="space-x-4">
+          <NavLink
+            onClick={() => setShow(!show)}
+            to="/"
+            className={({ isActive }) => (isActive ? "text-red-600" : "")}
+          >
+            Home
+          </NavLink>
+          <NavLink
+            onClick={() => setShow(!show)}
+            to="/about"
+            className={({ isActive }) => (isActive ? "text-red-600" : "")}
+          >
+            About
+          </NavLink>
         </div>
         {/* Nav Buttons */}
-        <div className="nav__buttons">
-          <button className="toggle__theme" onClick={toggleTheme}>
-            <i
-              className={`bx bxs-${state.theme === "dark" ? "moon" : "sun"}`}
-              id="theme-button"
-            ></i>
+        <div className="text-2xl space-x-2">
+          <button className="">
+            <i className="bx bx-moon" id="theme-button"></i>
           </button>
           <a href="https://github.com/skyespirates/taskSky" target="_blank">
             <i className="bx bxl-github"></i>
           </a>
-          <div className="toggle__menu" onClick={() => setShow(!show)}>
-            {show ? (
-              <i className="bx bx-x"></i>
-            ) : (
-              <i className="bx bx-menu"></i>
-            )}
-          </div>
         </div>
       </nav>
     </header>

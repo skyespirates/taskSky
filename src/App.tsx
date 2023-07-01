@@ -3,8 +3,6 @@ import Layout from "./Layout/Layout";
 import Home from "./components/Home/Home";
 import About from "./components/About/About";
 
-import "./App.css";
-
 const App = () => {
   return (
     <Routes>
