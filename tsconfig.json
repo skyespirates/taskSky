@@ -6,6 +6,16 @@
     "module": "ESNext",
     "skipLibCheck": true,
 
+    /* redux config */
+    "typeRoots": ["node_modules/@types", "custom_typings"],
+    "types": ["@reduxjs/toolkit"],
+
+    /* tailwind config */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,

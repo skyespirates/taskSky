@@ -4,12 +4,14 @@ import { ThemeProvider } from "../context/themeContext.tsx";
 
 const Layout = () => {
   return (
-    <div className="container">
+    <>
       <ThemeProvider>
         <Header />
       </ThemeProvider>
-      <Outlet />
-    </div>
+      <main className="px-20 min-h-screen py-6">
+        <Outlet />
+      </main>
+    </>
   );
 };
 

@@ -15,7 +15,8 @@ const Header = () => {
     <header className="">
       <nav className="border flex justify-between items-center py-2 px-8">
         <a href="/" className="text-2xl">
-          Task<span className="text-blue-600">Sky</span>
+          {" "}
+          = Task<span className="text-blue-600">Sky</span>
         </a>
         <div className="space-x-4">
           <NavLink
@@ -31,6 +32,13 @@ const Header = () => {
             className={({ isActive }) => (isActive ? "text-red-600" : "")}
           >
             About
+          </NavLink>
+          <NavLink
+            onClick={() => setShow(!show)}
+            to="/anime"
+            className={({ isActive }) => (isActive ? "text-red-600" : "")}
+          >
+            Anime
           </NavLink>
         </div>
         {/* Nav Buttons */}
