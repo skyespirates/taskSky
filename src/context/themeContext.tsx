@@ -1,7 +1,7 @@
 import { createContext, useReducer } from "react";
 
 type StateType = {
-  theme: "light" | "dark";
+  theme: null | "dark";
   fontsize: number;
 };
 
@@ -11,7 +11,7 @@ type ActionType = {
 };
 
 const INITIAL_STATE: StateType = {
-  theme: "dark",
+  theme: null,
   fontsize: 16,
 };
 
@@ -25,7 +25,7 @@ type Reducer<S, A> = (state: S, action: A) => S;
 const reducer: Reducer<StateType, ActionType> = (state, action) => {
   switch (action.type) {
     case "CHANGE_THEME":
-      return { ...state, theme: state.theme === "dark" ? "light" : "dark" };
+      return { ...state, theme: state.theme === "dark" ? "" : "dark" };
     case "CHANGE_FONTSIZE":
       return { ...state, fontsize: action.payload! };
     default:

@@ -19,19 +19,12 @@ const Anime = () => {
   const dispatch = useDispatch();
   const state = useSelector((state) => state.anime);
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log(typeof searchParams.get("page"));
 
   useEffect(() => {
     setSearchParams({ page: state.page });
     dispatch(fetchAnime(state.page));
   }, [state.page]);
 
-  // useEffect(() => {
-  //   dispatch(fetchAnime());
-  // }, []);
-  // if (state.data) {
-  //   console.log(state.data);
-  // }
   return (
     <div className="grid grid-cols-3 gap-4">
       {state.status === "loading" && (
