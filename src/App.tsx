@@ -6,6 +6,7 @@ import Home from "./components/Home/Home";
 import About from "./components/About/About";
 import Anime from "./pages/Anime";
 import AnimeDetails from "./pages/AnimeDetails";
+import SearchAnime from "./pages/SearchAnime";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="about" element={<About />} />
         <Route path="anime" element={<Anime />} />
         <Route path="anime/:id" element={<AnimeDetails />} />
+        <Route path="search" element={<SearchAnime />} />
       </Route>
     </Routes>
   );

@@ -59,6 +59,13 @@ const Header = forwardRef((_, ref) => {
           >
             Anime
           </NavLink>
+          <NavLink
+            onClick={() => setShow(!show)}
+            to="/search"
+            className={({ isActive }) => (isActive ? "text-red-600" : "")}
+          >
+            Search
+          </NavLink>
         </div>
         {/* Nav Buttons */}
         <div className="text-2xl space-x-2">

@@ -15,8 +15,23 @@ export const fetchAnime = createAsyncThunk(
   }
 );
 
+export const fetchAnimeByQuery = createAsyncThunk(
+  "anime/fetchAnimeByQuery",
+  async (query) => {
+    const { data } = await api("/anime", {
+      method: "get",
+      params: {
+        q: query,
+        limit: 9,
+      },
+    });
+    return data.data;
+  }
+);
+
 type AnimeState = {
   data: {}[];
+  searchAnime: {}[];
   status: string;
   error?: null | string;
   page: string | number;
@@ -24,6 +39,7 @@ type AnimeState = {
 
 const initialState: AnimeState = {
   data: [],
+  searchAnime: [],
   status: "idle",
   error: null,
   page: "1",
@@ -39,6 +55,9 @@ const animeSlice = createSlice({
     previousPage: (state) => {
       state.page = parseInt(state.page as number) - 1;
     },
+    resetSearchAnime: (state) => {
+      state.searchAnime = [];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -52,10 +71,21 @@ const animeSlice = createSlice({
       .addCase(fetchAnime.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+      })
+      .addCase(fetchAnimeByQuery.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(fetchAnimeByQuery.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.searchAnime = action.payload;
+      })
+      .addCase(fetchAnimeByQuery.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
       });
   },
 });
 
-export const { previousPage, nextPage } = animeSlice.actions;
+export const { previousPage, nextPage, resetSearchAnime } = animeSlice.actions;
 
 export default animeSlice.reducer;
